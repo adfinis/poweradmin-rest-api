@@ -1,0 +1,24 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.5
+    hostname: db
+    volumes:
+      - "./mysql:/var/lib/mysql"
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: sydns
+      MYSQL_DATABASE: powerdns
+      MYSQL_USER: sydns
+      MYSQL_PASSWORD: sydns
+  pdns:
+    build: ./docker/powerdns
+    hostname: pdns
+    ports:
+      - "53:53"
+      - "53:53/udp"
+    restart: always
+    links:
+      - db

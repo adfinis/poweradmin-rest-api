@@ -1,0 +1,9 @@
+env
+db.sqlite3
+powerdns_data.sql
+mysql
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
