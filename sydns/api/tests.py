@@ -1,13 +1,23 @@
 from django.core.urlresolvers import reverse
-from api.models import Domain
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
 
 
 class DomainTests(APITestCase):
 
-    def test_domain_list(self):
-        url = reverse('domain-list')
-        response = self.client.get(url)
-        assert response.status_code == status.HTTP_401_UNAUTHORIZED
+    fixtures = ['domains.yaml']
 
+    def setUp(self):
+
+        self.noauth_client = APIClient()
+        self.client.login(username='ldapuser' password='quahGh2Waiwo')
+
+    def test_domain_list(self):
+
+        url = reverse('domain-list')
+
+        auth_response = self.client.get(url)
+        noauth_response = self.client.get(url)
+
+        self.assertEqual auth_response.status_code == status.HTTP_200_OK
+        self.assertEqual noauth_response.status_code == status.HTTP_401_UNAUTHORIZED
