@@ -11,14 +11,8 @@ install: ## Install dependencies
 lint: ## Lint source code
 	flake8
 
-db_data: ## Import mock data for testing
-	docker exec -i sydnssrc_db_1 mysql -usydns -psydns powerdns < sample/powerdns_data.sql
-
-db_schema_fix: ## Apply missing contraints to database schema 
-	docker exec -i sydnssrc_db_1 mysql -usydns -psydns powerdns < sample/patched_database_schema.sql
-
 db_shell: ## Open up a mysql shell
-	docker exec -it sydnssrc_db_1 mysql -usydns -psydns powerdns
+	docker exec -it powerdnsrestapisrc_db_1 mysql -usydns -psydns powerdns
 
 test: ## Runs all tests
 	python3 sydns/manage.py test
