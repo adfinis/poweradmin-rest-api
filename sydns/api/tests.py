@@ -10,7 +10,7 @@ class DomainTests(APITestCase):
     def setUp(self):
 
         self.noauth_client = APIClient()
-        self.client.login(username='ldapuser' password='quahGh2Waiwo')
+        self.client.login(username='ldapuser', password='Test1234!')
 
     def test_domain_list(self):
 
