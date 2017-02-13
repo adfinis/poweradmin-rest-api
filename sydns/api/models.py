@@ -11,7 +11,7 @@ class Domain(models.Model):
     account = models.CharField(max_length=40, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'domains'
 
 
@@ -28,7 +28,7 @@ class Record(models.Model):
     disabled = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'records'
 
 
@@ -44,7 +44,7 @@ class User(models.Model):
     use_ldap = models.IntegerField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'users'
 
 
@@ -55,5 +55,5 @@ class Zone(models.Model):
     zone_templ_id = models.IntegerField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'zones'
