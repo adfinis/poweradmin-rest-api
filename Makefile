@@ -14,4 +14,4 @@ db_shell: ## Open up a mysql shell
 	docker exec -it powerdnsrestapisrc_db_1 mysql -usydns -psydns powerdns
 
 test: ## Runs all tests
-	python3 sydns/manage.py test
+	python3 sydns/manage.py test api
