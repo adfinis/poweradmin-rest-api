@@ -9,7 +9,7 @@ variables:
     
 before_script:
   - make install
-  - mv sample/settings.py sydns/sydns/settings.py
+  - mv sample/configuration.py sydns/sydns/configuration.py
   - python3 sydns/manage.py migrate
 
 stages:
