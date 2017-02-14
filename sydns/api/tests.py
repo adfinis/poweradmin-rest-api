@@ -10,7 +10,7 @@ class DomainTests(APITestCase):
     def setUp(self):
 
         self.noauth_client = APIClient()
-        self.client.login(username='ldapuser', password='Test1234!')
+        self.client.login(username='admin', password='Test1234!')
 
     def test_domain_list(self):
 
@@ -19,5 +19,5 @@ class DomainTests(APITestCase):
         auth_response = self.client.get(url)
         noauth_response = self.client.get(url)
 
-        self.assertEqual auth_response.status_code == status.HTTP_200_OK
-        self.assertEqual noauth_response.status_code == status.HTTP_401_UNAUTHORIZED
+        self.assertEqual(auth_response.status_code, status.HTTP_200_OK)
+        self.assertEqual(noauth_response.status_code, status.HTTP_401_UNAUTHORIZED)
