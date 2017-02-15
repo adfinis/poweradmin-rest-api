@@ -24,14 +24,9 @@ class DomainList(generics.ListCreateAPIView):
         '''Only return domains which the user is allowed to manage.
 
         '''
-
         owner = User.objects.get(username=self.request.user.username)
-        zones = Zone.objects.filter(owner=owner.id)
-
-        # Compose list of domain names which the user is allowed to manage.
-        allowed_domains = [Domain.objects.get(pk=zone.domain_id).id for zone in zones]
-
-        return Domain.objects.filter(pk__in=allowed_domains)
+        allowed_zones = [zone.id for zone in Zone.objects.filter(owner=owner.id)]
+        return Domain.objects.filter(pk__in=allowed_zones)
 
 
 class DomainDetail(generics.RetrieveUpdateAPIView):
@@ -43,13 +38,10 @@ class DomainDetail(generics.RetrieveUpdateAPIView):
         '''Only return domains which the user is allowed to manage.
 
         '''
-
         owner = User.objects.get(username=self.request.user.username)
-        zones = Zone.objects.filter(owner=owner.id)
-        # Compose list of domain names which the user is allowed to manage.
-        allowed_domains = [Domain.objects.get(pk=zone.domain_id).id for zone in zones]
+        allowed_zones = [zone.id for zone in Zone.objects.filter(owner=owner.id)]
+        return Domain.objects.filter(pk__in=allowed_zones)
 
-        return Domain.objects.filter(pk__in=domain_list)
 
 
 class RecordList(generics.ListCreateAPIView):
