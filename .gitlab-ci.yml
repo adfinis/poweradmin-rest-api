@@ -8,10 +8,9 @@ variables:
   MYSQL_PASSWORD: sydns
     
 before_script:
-  - mysql -hmysql -usydns -psydns powerdns < sample/powerdns_schema.sql
-  - mysql -hmysql -usydns -psydns powerdns < sample/patched_database_schema.sql
   - make install
-  - mv sample/settings.py sydns/sydns/settings.py
+  - mv sample/configuration.py sydns/sydns/configuration.py
+  - python3 sydns/manage.py migrate
 
 stages:
   - test

@@ -16,7 +16,10 @@ class Domain(models.Model):
 
 
 class Record(models.Model):
-    domain_id = models.IntegerField(blank=True, null=True)
+    domain_id = models.ForeignKey(
+        'Domain',
+        on_delete=models.CASCADE,
+    )
     name = models.CharField(max_length=255, blank=True, null=True)
     type = models.CharField(max_length=10, blank=True, null=True)
     content = models.CharField(max_length=255, blank=True, null=True)
@@ -25,7 +28,6 @@ class Record(models.Model):
     change_date = models.IntegerField(blank=True, null=True)
     ordername = models.CharField(max_length=255, blank=True, null=True)
     auth = models.IntegerField(blank=True, null=True)
-    disabled = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -49,7 +51,10 @@ class User(models.Model):
 
 
 class Zone(models.Model):
-    domain_id = models.IntegerField()
+    domain_id = models.ForeignKey(
+        'Domain',
+        on_delete=models.CASCADE,
+    )
     owner = models.IntegerField()
     comment = models.TextField(blank=True, null=True)
     zone_templ_id = models.IntegerField()
