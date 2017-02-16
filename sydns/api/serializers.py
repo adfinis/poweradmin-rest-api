@@ -7,8 +7,8 @@ class DomainSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         lookup_field = 'name'
         model = Domain
-        fields = ('name', 'type', 'master')
-        read_only_fields = ('type', 'master')
+        fields = ('name', 'type',)
+        read_only_fields = ('type',)
 
 
 class RecordSerializer(serializers.HyperlinkedModelSerializer):
@@ -24,4 +24,4 @@ class ZoneSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Zone
-        fields = ('domain_id', 'owner')
+        fields = ('domain_id', 'owner',)
