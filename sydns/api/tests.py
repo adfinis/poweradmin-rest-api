@@ -26,8 +26,7 @@ class DomainTests(APITestCase):
 
         expected_json = {
             'results': [{'name': 'example.com',
-                         'type': 'NATIVE',
-                         'master': None}],
+                         'type': 'NATIVE'}],
             'count': 1,
             'next': None,
             'previous': None}
@@ -42,8 +41,7 @@ class DomainTests(APITestCase):
         response = self.client.get(url, format='json')
 
         expected_json = {'name': 'example.com',
-                         'type': 'NATIVE',
-                         'master': None}
+                         'type': 'NATIVE'}
 
         self.assertEqual(response.json() , expected_json)
 
@@ -52,34 +50,32 @@ class DomainTests(APITestCase):
         url = reverse('domain-list')
 
         data = {'name': 'test-example.com',
-                'type': 'NATIVE',
-                'master': None}
+                'type': 'NATIVE'}
+
 
         response = self.client.post(url, data, format='json')
 
         self.assertEqual(response.json() , data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_domain_create(self):
+    def test_domain_update(self):
 
         url = reverse('domain-list') + 'example.com/'
 
         data = {'name': 'example2.com',
-                'type': 'NATIVE',
-                'master': None}
+                'type': 'NATIVE'}
 
         response = self.client.put(url, data, format='json')
 
         self.assertEqual(response.json() , data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_domain_dsetroy(self):
+    def test_domain_destroy(self):
 
         url = reverse('domain-list')
 
         data = {'name': 'to-be-deleted-example.com',
-                'type': 'NATIVE',
-                'master': None}
+                'type': 'NATIVE'}
 
         response = self.client.post(url, data, format='json')
 

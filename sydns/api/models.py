@@ -6,7 +6,13 @@ class Domain(models.Model):
     name = models.CharField(unique=True, max_length=255)
     master = models.CharField(max_length=20, blank=True, null=True)
     last_check = models.IntegerField(blank=True, null=True)
-    type = models.CharField(max_length=6)
+    type = models.CharField(max_length=6, default='NATIVE')
+    """
+    `NATIVE` replication is the default, unless other operation is specifically configured. Native
+    replication basically means that PowerDNS will not send out DNS update notifications, nor will
+    react to them. PowerDNS assumes that the backend is taking care of replication unaided.
+    Other options include `SLAVE` and `MASTER`.
+    """
     notified_serial = models.IntegerField(blank=True, null=True)
     account = models.CharField(max_length=40, blank=True, null=True)
 
@@ -57,7 +63,7 @@ class Zone(models.Model):
     )
     owner = models.IntegerField()
     comment = models.TextField(blank=True, null=True)
-    zone_templ_id = models.IntegerField()
+    zone_templ_id = models.IntegerField(default=0)
 
     class Meta:
         managed = True
