@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
-from api import views
-from api.views import DomainViewSet
+from sydns.api import views
+from sydns.api.views import DomainViewSet
 
 domain_list = DomainViewSet.as_view({
     'get': 'list',

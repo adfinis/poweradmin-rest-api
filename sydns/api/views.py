@@ -1,5 +1,5 @@
-from api.models import Domain, Record, Zone, User
-from api.serializers import DomainSerializer, RecordSerializer, ZoneSerializer
+from sydns.api.models import Domain, Record, Zone, User
+from sydns.api.serializers import DomainSerializer, RecordSerializer, ZoneSerializer
 from rest_framework import viewsets, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response

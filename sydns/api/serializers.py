@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Domain, Record, Zone
+from sydns.api.models import Domain, Record, Zone
 
 
 class DomainSerializer(serializers.HyperlinkedModelSerializer):
