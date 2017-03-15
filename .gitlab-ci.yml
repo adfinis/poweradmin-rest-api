@@ -8,9 +8,12 @@ variables:
   MYSQL_PASSWORD: sydns
     
 before_script:
+  - git submodule update --init
+  - virtualenv -p `which python3` env
+  - source env/bin/activate
   - make install
-  - mv sample/configuration.py sydns/sydns/configuration.py
-  - python3 sydns/manage.py migrate
+  - mv sample/configuration.py sydns/configuration.py
+  - python manage.py migrate
 
 stages:
   - test
@@ -18,4 +21,4 @@ stages:
 run-test:
   stage: test
   script:
-    - make test
+    - make test_ext

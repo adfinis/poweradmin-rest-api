@@ -16,5 +16,5 @@ Including another URLconf
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r'^v1/', include('api.urls')),
+    url(r'^v1/', include('sydns.api.urls')),
 ]

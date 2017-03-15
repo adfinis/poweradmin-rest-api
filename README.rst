@@ -8,7 +8,7 @@ Installation
 
 .. code:: shell
 
-    apt-get install python3 python3-pip python3-dev libmysqlclient-dev
+    apt-get install python3 python3-pip python3-virtualenv virtualenv python3-dev libmysqlclient-dev
 
 2. Create and activate virtualenv
 
@@ -22,10 +22,6 @@ Installation
     pip install -r requirements.txt
    
 
-PowerDNS SQL Schema Adjustments
--------------------------------
-Our current PowerDNS schema does not use constraints to prevent orphan records.
-Checkout `sample/patched_database_schema.sql` for further information.
-
-
-	  
+Configuration
+-------------
+The configuration happens through `sydns/configuration.py`.
