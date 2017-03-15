@@ -3,7 +3,15 @@ db.sqlite3
 powerdns_data.sql
 mysql
 
+# Py Project files
+.cache/
+.coverage
+.deps/
+.flake8
+powerdns_rest_api.egg-info/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+.python-version
