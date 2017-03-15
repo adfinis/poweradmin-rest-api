@@ -7,7 +7,6 @@ mysql
 .cache/
 .coverage
 .deps/
-.flake8
 powerdns_rest_api.egg-info/
 
 # Byte-compiled / optimized / DLL files
