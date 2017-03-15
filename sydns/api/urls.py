@@ -34,7 +34,7 @@ record_detail = RecordViewSet.as_view({
 urlpatterns = [
     url(r'^domains/(?P<name>.*)/$', domain_detail, name='domain-detail'),
     url(r'^domains/$', domain_list, name='domain-list'),
-    url(r'^records/(?P<pk>[0-9]+)3/$', record_detail, name='record-detail'),
+    url(r'^records/(?P<pk>[0-9]+)/$', record_detail, name='record-detail'),
     url(r'^records/$', record_list, name='record-list'),
     url(r'^api-auth/', include('rest_framework.urls',)),
     url(r'^', views.api_root),
