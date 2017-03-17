@@ -11,7 +11,7 @@ before_script:
   - git submodule update --init
   - virtualenv -p `which python3` env
   - source env/bin/activate
-  - make install
+  - make install_dev
   - mv sample/configuration.py sydns/configuration.py
   - python manage.py migrate
 
@@ -21,4 +21,4 @@ stages:
 run-test:
   stage: test
   script:
-    - make test_ext
+    - make pytest-no-cov
