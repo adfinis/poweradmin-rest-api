@@ -1,7 +1,6 @@
 from django.core.urlresolvers import reverse
 from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
-from sydns.api.models import Record
 
 
 class RecordTests(APITestCase):
@@ -39,7 +38,7 @@ class RecordTests(APITestCase):
 
     def test_record_retrieve(self):
 
-        url = reverse('record-list') + '1/'
+        url = reverse('record-detail', args=[1])
 
         response = self.client.get(url, format='json')
 
@@ -68,7 +67,9 @@ class RecordTests(APITestCase):
         response = self.client.post(url, data, format='json')
 
         returned_data = response.json()
-        returned_data.pop('id') # Remove primary key from data
+
+        # Remove primary key from data
+        returned_data.pop('id')
 
         self.assertEqual(returned_data , data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -76,7 +77,7 @@ class RecordTests(APITestCase):
 
     def test_record_destroy(self):
 
-        url = reverse('record-list') + '1/'
+        url = reverse('record-detail', args=[1])
 
         response = self.client.delete(url, format='json')
 
