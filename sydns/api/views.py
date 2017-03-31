@@ -22,13 +22,16 @@ class DomainViewSet(viewsets.ModelViewSet):
     """
     serializer_class = DomainSerializer
     permission_classes = (IsAuthenticated,)
-    lookup_field = "name"
+    lookup_field = 'name'
+    lookup_value_regex = '.*'
 
     def get_queryset(self):
         """
         Only return domains which the user is allowed to manage.
         """
-        owner = User.objects.get(username=self.request.user.username)
+
+        # django_auth_ldap converts the username to lowercase when creating a new user
+        owner = User.objects.get(username__iexact=self.request.user.username)
         allowed_zones = [zone.id for zone in Zone.objects.filter(owner=owner.id)]
 
         return Domain.objects.filter(pk__in=allowed_zones)
@@ -59,9 +62,11 @@ class RecordViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """
-        Only return domains which the user is allowed to manage.
+        Only return records which the user is allowed to manage.
         """
-        owner = User.objects.get(username=self.request.user.username)
+
+        # django_auth_ldap converts the username to lowercase when creating a new user
+        owner = User.objects.get(username__iexact=self.request.user.username)
         allowed_zones = [zone.id for zone in Zone.objects.filter(owner=owner.id)]
 
         return Record.objects.filter(domain_id__in=allowed_zones)
