@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
-from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
+from rest_framework.test import APIClient, APITestCase
 
 
 class RecordTests(APITestCase):
@@ -24,14 +24,40 @@ class RecordTests(APITestCase):
         url = reverse('record-list')
         response = self.client.get(url, format='json')
 
-        expected_json = {'previous': None,
-                         'next': None,
-                         'results': [
-                             {'content': 'dns1.syhosting.ch info@syhosting.ch 2014103002 ','ttl': 3600, 'domain_id': 1, 'id': 1, 'name': 'example.com', 'prio': 0, 'type': 'SOA'},
-                             {'content': 'dns1.syhosting.ch', 'ttl': 3600, 'domain_id': 1, 'id': 2, 'name': 'example.com', 'prio': 0, 'type': 'NS'},
-                             {'content': 'dns2.syhosting.ch', 'ttl': 3600, 'domain_id': 1, 'id': 3, 'name': 'example.com', 'prio': 0, 'type': 'NS'},
-                             {'content': '91.234.189.11', 'ttl': 600, 'domain_id': 1, 'id': 4, 'name': 'www.example.com', 'prio': 0, 'type': 'A'}],
-                         'count': 4}
+        expected_json = {
+            'previous': None,
+            'next': None,
+            'results': [
+                {'content': 'dns1.syhosting.ch info@syhosting.ch 2014103002 ',
+                 'ttl': 3600,
+                 'domain_id': 1,
+                 'id': 1,
+                 'name': 'example.com',
+                 'prio': 0,
+                 'type': 'SOA'},
+                {'content': 'dns1.syhosting.ch',
+                 'ttl': 3600,
+                 'domain_id': 1,
+                 'id': 2,
+                 'name': 'example.com',
+                 'prio': 0,
+                 'type': 'NS'},
+                {'content': 'dns2.syhosting.ch',
+                 'ttl': 3600,
+                 'domain_id': 1,
+                 'id': 3,
+                 'name': 'example.com',
+                 'prio': 0,
+                 'type': 'NS'},
+                {'content': '91.234.189.11',
+                 'ttl': 600,
+                 'domain_id': 1,
+                 'id': 4,
+                 'name': 'www.example.com',
+                 'prio': 0,
+                 'type': 'A'}
+            ],
+            'count': 4}
 
         self.assertEqual(response.json() , expected_json)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -42,13 +68,14 @@ class RecordTests(APITestCase):
 
         response = self.client.get(url, format='json')
 
-        expected_json = {'content': 'dns1.syhosting.ch info@syhosting.ch 2014103002 ',
-                         'ttl': 3600,
-                         'domain_id': 1,
-                         'id': 1,
-                         'name': 'example.com',
-                         'prio': 0,
-                         'type': 'SOA'}
+        expected_json = {
+            'content': 'dns1.syhosting.ch info@syhosting.ch 2014103002 ',
+            'ttl': 3600,
+            'domain_id': 1,
+            'id': 1,
+            'name': 'example.com',
+            'prio': 0,
+            'type': 'SOA'}
 
         self.assertEqual(response.json() , expected_json)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -73,7 +100,6 @@ class RecordTests(APITestCase):
 
         self.assertEqual(returned_data , data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
 
     def test_record_destroy(self):
 

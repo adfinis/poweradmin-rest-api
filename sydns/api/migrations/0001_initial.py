@@ -16,7 +16,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Domain',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                                        serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, unique=True)),
                 ('master', models.CharField(blank=True, max_length=20, null=True)),
                 ('last_check', models.IntegerField(blank=True, null=True)),
@@ -32,7 +33,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Record',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                                        serialize=False, verbose_name='ID')),
                 ('domain_id', models.IntegerField(blank=True, null=True)),
                 ('name', models.CharField(blank=True, max_length=255, null=True)),
                 ('type', models.CharField(blank=True, max_length=10, null=True)),
@@ -52,7 +54,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                                        serialize=False, verbose_name='ID')),
                 ('username', models.CharField(max_length=64)),
                 ('password', models.CharField(max_length=128)),
                 ('fullname', models.CharField(max_length=255)),
@@ -71,7 +74,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Zone',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                                        serialize=False, verbose_name='ID')),
                 ('domain_id', models.IntegerField()),
                 ('owner', models.IntegerField()),
                 ('comment', models.TextField(blank=True, null=True)),

@@ -21,4 +21,4 @@ stages:
 run-test:
   stage: test
   script:
-    - make pytest-no-cov
+    - make test

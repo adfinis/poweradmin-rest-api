@@ -1,7 +1,7 @@
-from django.conf.urls import url, include
+from django.conf.urls import include, url
+from rest_framework import routers
 from sydns.api import views
 from sydns.api.views import DomainViewSet, RecordViewSet
-from rest_framework import routers
 
 
 router = routers.SimpleRouter()
