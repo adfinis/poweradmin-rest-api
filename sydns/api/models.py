@@ -8,10 +8,11 @@ class Domain(models.Model):
     last_check = models.IntegerField(blank=True, null=True)
     type = models.CharField(max_length=6, default='NATIVE')
     """
-    `NATIVE` replication is the default, unless other operation is specifically configured. Native
-    replication basically means that PowerDNS will not send out DNS update notifications, nor will
-    react to them. PowerDNS assumes that the backend is taking care of replication unaided.
-    Other options include `SLAVE` and `MASTER`.
+    `NATIVE` replication is the default, unless other operation is specifically
+    configured. Native replication basically means that PowerDNS will not send
+    out DNS update notifications, nor will react to them. PowerDNS assumes that
+    the backend is taking care of replication unaided.  Other options include
+    `SLAVE` and `MASTER`.
     """
     notified_serial = models.IntegerField(blank=True, null=True)
     account = models.CharField(max_length=40, blank=True, null=True)

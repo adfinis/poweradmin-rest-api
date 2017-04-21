@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class ApiConfig(AppConfig):
     name = 'sydns.api'
-    label= 'api'
+    label = 'api'
