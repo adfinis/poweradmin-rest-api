@@ -23,7 +23,7 @@ class Domain(models.Model):
 
 
 class Record(models.Model):
-    domain_id = models.ForeignKey(
+    domain = models.ForeignKey(
         'Domain',
         on_delete=models.CASCADE,
     )
