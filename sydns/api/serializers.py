@@ -12,12 +12,9 @@ class DomainSerializer(serializers.ModelSerializer):
 
 
 class RecordSerializer(serializers.ModelSerializer):
-    domain_name = serializers.StringRelatedField(many=False)
-
     class Meta:
         model = Record
-        fields = ('id', 'domain_name', 'name',
-                  'type', 'content', 'ttl', 'prio',)
+        fields = ('id', 'name', 'type', 'content', 'ttl', 'prio',)
         read_only_fields = ('id',)
 
 
@@ -25,4 +22,4 @@ class ZoneSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Zone
-        fields = ('domain_id', 'owner',)
+        fields = ('domain', 'owner')
