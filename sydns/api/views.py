@@ -1,10 +1,10 @@
-from rest_framework import status, viewsets
+from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.exceptions import ParseError
-from sydns.api.models import Domain, Record, User, Zone
+from sydns.api.models import Domain, Record, User
 from sydns.api.permissions import IsRecordOwner
 from sydns.api.serializers import (DomainSerializer, RecordSerializer)
 from sydns.api.filters import RecordFilter
@@ -37,25 +37,6 @@ class DomainViewSet(viewsets.ModelViewSet):
         owner = User.objects.get(username__iexact=self.request.user.username)
 
         return Domain.objects.filter(zones__owner=owner.id)
-
-    def create(self, request):
-        """
-        Link user to the created domain through a record in the in the
-        intermediate "zones" table.
-
-        TODO: this should happen on the serializer
-        example: http://www.drf.org/api-guide/validators/#currentuserdefault
-        """
-        owner = User.objects.get(username__iexact=self.request.user.username)
-
-        domain_serializer = DomainSerializer(data=request.data)
-        domain_serializer.is_valid()
-        domain = domain_serializer.save()
-
-        zone = Zone(domain=domain, owner=owner.id)
-        zone.save()
-
-        return Response(domain_serializer.data, status=status.HTTP_201_CREATED)
 
 
 class RequiredFilterViewSetMixin(object):
