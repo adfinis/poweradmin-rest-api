@@ -26,6 +26,7 @@ class Record(models.Model):
     domain = models.ForeignKey(
         'Domain',
         on_delete=models.CASCADE,
+        related_name='records'
     )
     name = models.CharField(max_length=255, blank=True, null=True)
     type = models.CharField(max_length=10, blank=True, null=True)
@@ -58,11 +59,13 @@ class User(models.Model):
 
 
 class Zone(models.Model):
-    domain_id = models.ForeignKey(
+    domain = models.ForeignKey(
         'Domain',
         on_delete=models.CASCADE,
+        related_name='zones'
     )
     owner = models.IntegerField()
+    # TODO: shouldn't this be a foreignkey?
     comment = models.TextField(blank=True, null=True)
     zone_templ_id = models.IntegerField(default=0)
 
