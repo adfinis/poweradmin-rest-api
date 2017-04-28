@@ -22,7 +22,9 @@ class RecordTests(APITestCase):
     def test_record_list(self):
 
         url = reverse('record-list')
-        response = self.client.get(url, format='json')
+        response = self.client.get(
+            url, format='json', data={'domain': 'example.com'}
+        )
 
         expected_json = {
             'previous': None,
@@ -30,28 +32,28 @@ class RecordTests(APITestCase):
             'results': [
                 {'content': 'dns1.syhosting.ch info@syhosting.ch 2014103002 ',
                  'ttl': 3600,
-                 'domain_id': 1,
+                 'domain': 1,
                  'id': 1,
                  'name': 'example.com',
                  'prio': 0,
                  'type': 'SOA'},
                 {'content': 'dns1.syhosting.ch',
                  'ttl': 3600,
-                 'domain_id': 1,
+                 'domain': 1,
                  'id': 2,
                  'name': 'example.com',
                  'prio': 0,
                  'type': 'NS'},
                 {'content': 'dns2.syhosting.ch',
                  'ttl': 3600,
-                 'domain_id': 1,
+                 'domain': 1,
                  'id': 3,
                  'name': 'example.com',
                  'prio': 0,
                  'type': 'NS'},
                 {'content': '91.234.189.11',
                  'ttl': 600,
-                 'domain_id': 1,
+                 'domain': 1,
                  'id': 4,
                  'name': 'www.example.com',
                  'prio': 0,
@@ -59,8 +61,8 @@ class RecordTests(APITestCase):
             ],
             'count': 4}
 
-        self.assertEqual(response.json() , expected_json)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        assert response.json() == expected_json
+        assert response.status_code == status.HTTP_200_OK
 
     def test_record_retrieve(self):
 
@@ -71,7 +73,7 @@ class RecordTests(APITestCase):
         expected_json = {
             'content': 'dns1.syhosting.ch info@syhosting.ch 2014103002 ',
             'ttl': 3600,
-            'domain_id': 1,
+            'domain': 1,
             'id': 1,
             'name': 'example.com',
             'prio': 0,
@@ -86,7 +88,7 @@ class RecordTests(APITestCase):
 
         data = {'content': '192.168.3.4',
                 'ttl': 3600,
-                'domain_id': 1,
+                'domain': 'example.com',
                 'name': 'web01.example.com',
                 'prio': 0,
                 'type': 'A'}

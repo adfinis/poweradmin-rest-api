@@ -12,10 +12,13 @@ class DomainSerializer(serializers.ModelSerializer):
 
 
 class RecordSerializer(serializers.ModelSerializer):
+    domain = serializers.SlugRelatedField(
+        queryset=Domain.objects.all(), slug_field='name'
+    )
+
     class Meta:
         model = Record
-        fields = ('id', 'name', 'type', 'content', 'ttl', 'prio',)
-        read_only_fields = ('id',)
+        fields = ('name', 'type', 'content', 'ttl', 'prio', 'domain')
 
 
 class ZoneSerializer(serializers.ModelSerializer):

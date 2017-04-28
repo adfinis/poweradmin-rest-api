@@ -1,11 +1,8 @@
 from django_filters.rest_framework import FilterSet
-from django_filters import NumberFilter
-from models import Domain
+from sydns.api.models import Record
 
 
-class DomainFilter(FilterSet):
-    test_type = NumberFilter(name='domain')
-
+class RecordFilter(FilterSet):
     class Meta:
-        model = Domain
+        model = Record
         fields = ['domain']
