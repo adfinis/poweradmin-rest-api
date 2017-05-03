@@ -1,13 +1,14 @@
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
+from rest_framework.exceptions import ParseError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework.exceptions import ParseError
+
+from sydns.api.filters import RecordFilter
 from sydns.api.models import Domain, Record, User
 from sydns.api.permissions import IsRecordOwner
-from sydns.api.serializers import (DomainSerializer, RecordSerializer)
-from sydns.api.filters import RecordFilter
+from sydns.api.serializers import DomainSerializer, RecordSerializer
 
 
 @api_view(['GET'])

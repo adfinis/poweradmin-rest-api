@@ -1,6 +1,7 @@
-from rest_framework import serializers
 from django.db import transaction
-from sydns.api.models import Domain, Record, Zone, User
+from rest_framework import serializers
+
+from sydns.api.models import Domain, Record, User, Zone
 
 
 class DomainSerializer(serializers.ModelSerializer):
