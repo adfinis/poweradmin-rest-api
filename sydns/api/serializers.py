@@ -32,7 +32,7 @@ class RecordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Record
-        fields = ('name', 'type', 'content', 'ttl', 'prio', 'domain')
+        fields = ('id', 'name', 'type', 'content', 'ttl', 'prio', 'domain')
 
 
 class ZoneSerializer(serializers.ModelSerializer):
