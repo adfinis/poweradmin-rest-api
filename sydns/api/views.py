@@ -1,11 +1,14 @@
-from rest_framework import status, viewsets
+from rest_framework import viewsets
 from rest_framework.decorators import api_view
+from rest_framework.exceptions import ParseError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from sydns.api.models import Domain, Record, User, Zone
-from sydns.api.serializers import (DomainSerializer, RecordSerializer,
-                                   ZoneSerializer)
+
+from sydns.api.filters import RecordFilter
+from sydns.api.models import Domain, Record, User
+from sydns.api.permissions import IsRecordOwner
+from sydns.api.serializers import DomainSerializer, RecordSerializer
 
 
 @api_view(['GET'])
@@ -33,35 +36,44 @@ class DomainViewSet(viewsets.ModelViewSet):
         # django_auth_ldap converts the username to lowercase when
         # creating a new user
         owner = User.objects.get(username__iexact=self.request.user.username)
-        allowed_zones = [zone.id for zone in
-                         Zone.objects.filter(owner=owner.id)]
 
-        return Domain.objects.filter(pk__in=allowed_zones)
-
-    def create(self, request):
-        """
-        Link user to the created domain through a record in the in the
-        intermediate "zones" table.
-        """
-        owner = User.objects.get(username=request.user.username)
-
-        domain_serializer = DomainSerializer(data=request.data)
-        domain_serializer.is_valid()
-        domain = domain_serializer.save()
-
-        zone = ZoneSerializer(data={'domain_id': domain.id, 'owner': owner.id})
-        zone.is_valid()
-        zone.save()
-
-        return Response(domain_serializer.data, status=status.HTTP_201_CREATED)
+        return Domain.objects.filter(zones__owner=owner.id)
 
 
-class RecordViewSet(viewsets.ModelViewSet):
+class RequiredFilterViewSetMixin(object):
+    """
+    Define filters that have to be present
+    Use when you don't want to return everything when no filter
+    is specified.
+    """
+    required_filters = ()
+    required_filter_actions = ('list',)
+
+    def initial(self, request, *args, **kwargs):
+        super().initial(request, *args, **kwargs)
+        if not self.has_required_filters:
+            raise ParseError()
+
+    @property
+    def has_required_filters(self):
+        if self.action not in self.required_filter_actions:
+            return True
+
+        return all(
+            self.request.query_params.get(f)
+            for f
+            in self.required_filters
+        )
+
+
+class RecordViewSet(RequiredFilterViewSetMixin, viewsets.ModelViewSet):
     """
     This viewset provides actions around `records`.
     """
     serializer_class = RecordSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsRecordOwner)
+    filter_class = RecordFilter
+    required_filters = ('domain',)
 
     def get_queryset(self):
         """
@@ -71,7 +83,6 @@ class RecordViewSet(viewsets.ModelViewSet):
         # django_auth_ldap converts the username to lowercase when
         # creating a new user
         owner = User.objects.get(username__iexact=self.request.user.username)
-        allowed_zones = [zone.id for zone in
-                         Zone.objects.filter(owner=owner.id)]
-
-        return Record.objects.filter(domain_id__in=allowed_zones)
+        return Record.objects.filter(
+            domain__zones__owner=owner.id
+        )
