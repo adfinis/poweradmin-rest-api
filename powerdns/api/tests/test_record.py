@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
-from sydns.api import models
+from powerdns.api import models
 
 
 class RecordTests(APITestCase):

@@ -5,9 +5,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from sydns.api.filters import RecordFilter
-from sydns.api.models import Domain, Record, User
-from sydns.api.serializers import DomainSerializer, RecordSerializer
+from powerdns.api.filters import RecordFilter
+from powerdns.api.models import Domain, Record, User
+from powerdns.api.serializers import DomainSerializer, RecordSerializer
 
 
 @api_view(['GET'])

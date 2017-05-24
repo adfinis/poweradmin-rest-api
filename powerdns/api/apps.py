@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class ApiConfig(AppConfig):
-    name = 'sydns.api'
+    name = 'powerdns.api'
     label = 'api'
