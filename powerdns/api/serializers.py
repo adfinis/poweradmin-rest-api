@@ -5,6 +5,14 @@ from powerdns.api.models import Domain, Record, User, Zone
 
 
 class DomainSerializer(serializers.ModelSerializer):
+    # TODO: default set type to NATIVE
+    """
+    `NATIVE` replication is the default, unless other operation is specifically
+    configured. Native replication basically means that PowerDNS will not send
+    out DNS update notifications, nor will react to them. PowerDNS assumes that
+    the backend is taking care of replication unaided.  Other options include
+    `SLAVE` and `MASTER`.
+    """
 
     @transaction.atomic
     def create(self, validated_data):
@@ -15,7 +23,7 @@ class DomainSerializer(serializers.ModelSerializer):
         domain = super().create(validated_data)
 
         owner = User.objects.get(username__iexact=self.context['request'].user)
-        Zone.objects.create(domain=domain, owner=owner.id)
+        Zone.objects.create(domain=domain, owner=owner.id, zone_templ_id=0)
 
         return domain
 
@@ -23,7 +31,6 @@ class DomainSerializer(serializers.ModelSerializer):
         lookup_field = 'name'
         model = Domain
         fields = ('name', 'type',)
-        read_only_fields = ('type',)
 
 
 class RecordSerializer(serializers.ModelSerializer):
