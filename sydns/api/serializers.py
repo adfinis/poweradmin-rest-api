@@ -1,5 +1,5 @@
 from django.db import transaction
-from rest_framework import serializers
+from rest_framework import exceptions, serializers
 
 from sydns.api.models import Domain, Record, User, Zone
 
@@ -14,8 +14,6 @@ class DomainSerializer(serializers.ModelSerializer):
         """
         domain = super().create(validated_data)
 
-        # TODO: Is this the right way to access serializer context?
-        # http://stackoverflow.com/questions/37275270/django-rest-framework-how-serializer-context-works
         owner = User.objects.get(username__iexact=self.context['request'].user)
         Zone.objects.create(domain=domain, owner=owner.id)
 
@@ -32,6 +30,17 @@ class RecordSerializer(serializers.ModelSerializer):
     domain = serializers.SlugRelatedField(
         queryset=Domain.objects.all(), slug_field='name'
     )
+
+    def validate_domain(self, domain):
+        """
+        Check whether is allowed to update records on this domain
+        """
+        request = self.context['request']
+        owner = User.objects.get(username__iexact=request.user.username)
+        if not domain.zones.filter(owner=owner.id).exists():
+            raise exceptions.PermissionDenied()
+
+        return domain
 
     class Meta:
         model = Record

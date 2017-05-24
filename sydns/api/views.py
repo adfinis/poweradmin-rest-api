@@ -7,7 +7,6 @@ from rest_framework.reverse import reverse
 
 from sydns.api.filters import RecordFilter
 from sydns.api.models import Domain, Record, User
-from sydns.api.permissions import IsRecordOwner
 from sydns.api.serializers import DomainSerializer, RecordSerializer
 
 
@@ -71,7 +70,7 @@ class RecordViewSet(RequiredFilterViewSetMixin, viewsets.ModelViewSet):
     This viewset provides actions around `records`.
     """
     serializer_class = RecordSerializer
-    permission_classes = (IsAuthenticated, IsRecordOwner)
+    permission_classes = (IsAuthenticated,)
     filter_class = RecordFilter
     required_filters = ('domain',)
 
