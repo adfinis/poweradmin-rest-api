@@ -1,4 +1,4 @@
-services: 
+services:
     - mysql:5.5
 
 variables:
@@ -6,7 +6,7 @@ variables:
   MYSQL_DATABASE: powerdns
   MYSQL_USER: sydns
   MYSQL_PASSWORD: sydns
-    
+
 before_script:
   - git submodule update --init
   - virtualenv -p `which python3` env
