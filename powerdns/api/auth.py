@@ -30,7 +30,7 @@ class LDAPBackend(LDAPBackend):
     Authenticated against ldap
 
     Added ability that only users with use_ldap flag set to
-    0 can actually authenticate.
+    one can actually authenticate.
     """
     def authenticate(self, request, username, password, **kwargs):
         """

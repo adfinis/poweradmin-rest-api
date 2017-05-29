@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.models import UserManager
 from django.db import models
 
 
@@ -59,6 +60,8 @@ class User(models.Model):
     is_active = models.IntegerField(db_column='active')
     perm_templ = models.IntegerField()
     use_ldap = models.IntegerField()
+
+    objects = UserManager()
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = [
