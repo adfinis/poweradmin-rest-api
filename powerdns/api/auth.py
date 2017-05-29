@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.backends import ModelBackend
 from django_auth_ldap.backend import LDAPBackend, _LDAPUser
 
 UserModel = get_user_model()
 
 
-class ModelBackend(object):
+class ModelBackend(ModelBackend):
     """
     Authenticates against powerdns.api.User model
 
@@ -13,25 +14,15 @@ class ModelBackend(object):
     """
 
     def authenticate(self, request, username=None, password=None, **kwargs):
-        if username is None:
+        if username is None:  # pragma: no cover
             username = kwargs.get(UserModel.USERNAME_FIELD)
 
         user = UserModel.objects.filter(
-            username__iexact=username, use_ldap=0).first()
-        if user is None:
+            username__iexact=username, use_ldap=0, is_active=True).first()
+        if user is None or not user.check_password(password):
             return None
 
-        if user.is_active and user.check_password(password):
-            return user
-
-        return None
-
-    def get_user(self, user_id):
-        try:
-            user = UserModel.objects.get(pk=user_id)
-        except UserModel.DoesNotExist:
-            return None
-        return user if user.is_active else None
+        return user
 
 
 class LDAPBackend(LDAPBackend):

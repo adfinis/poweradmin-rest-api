@@ -42,7 +42,22 @@ def ldap_users():
             "sn": ["LdapUser"]
         }
     )
-    directory = dict([top, people, groups, ldapuser])  # noqa: C406
+
+    ldapuser2 = (
+        "uid=ldapuser2,ou=people,o=test", {
+            "uid": ["ldapuser"],
+            "objectClass": [
+                "person", "organizationalPerson",
+                "inetOrgPerson", "posixAccount"
+            ],
+            "userPassword": ["Test1234!"],
+            "uidNumber": ["1000"],
+            "gidNumber": ["1000"],
+            "givenName": ["Ldapuser2"],
+            "sn": ["LdapUser2"]
+        }
+    )
+    directory = dict([top, people, groups, ldapuser, ldapuser2])  # noqa: C406
 
     mock = mockldap.MockLdap(directory)
     mock.start()

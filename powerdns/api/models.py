@@ -93,7 +93,7 @@ class User(models.Model):
         return True
 
     @property
-    def is_anonymous(self):
+    def is_anonymous(self):  # pragma: no cover
         """
         Always return False. This is a way of comparing User objects to
         anonymous users.
