@@ -1,9 +1,12 @@
 from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
+from sydns.api import models
 
 
 class RecordTests(APITestCase):
+    # TODO: use pure pytest and fixtures
+    # this will also replace django fixtures which are hard to maintain
 
     fixtures = ['domains.yaml']
 
@@ -109,6 +112,21 @@ class RecordTests(APITestCase):
 
         self.assertEqual(returned_data , data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_record_create_foreign_domain(self):
+        url = reverse('record-list')
+
+        models.Zone.objects.filter(domain__name='example.com').delete()
+
+        data = {'content': '192.168.3.4',
+                'ttl': 3600,
+                'domain': 'example.com',
+                'name': 'web01.example.com',
+                'prio': 0,
+                'type': 'A'}
+
+        response = self.client.post(url, data, format='json')
+        assert response.status_code == 403
 
     def test_record_destroy(self):
 
