@@ -1,7 +1,7 @@
 from django.db import transaction
 from rest_framework import exceptions, serializers
 
-from powerdns.api.models import Domain, Record, User, Zone
+from powerdns.api.models import Domain, Record, Zone
 
 
 class DomainSerializer(serializers.ModelSerializer):
@@ -43,8 +43,7 @@ class RecordSerializer(serializers.ModelSerializer):
         Check whether is allowed to update records on this domain
         """
         request = self.context['request']
-        owner = User.objects.get(username__iexact=request.user.username)
-        if not domain.zones.filter(owner=owner.id).exists():
+        if not domain.zones.filter(owner=request.user.id).exists():
             raise exceptions.PermissionDenied()
 
         return domain
