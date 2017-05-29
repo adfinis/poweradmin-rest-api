@@ -3,8 +3,8 @@
 #   * Make sure each model has one field with primary_key=True
 from __future__ import unicode_literals
 
-from django.db import models
 from django.contrib.auth.hashers import check_password
+from django.db import models
 
 
 class Domain(models.Model):

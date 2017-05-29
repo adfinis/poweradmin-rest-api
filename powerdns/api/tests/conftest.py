@@ -1,5 +1,5 @@
-import pytest
 import mockldap
+import pytest
 
 
 @pytest.fixture(autouse=True, scope="session")
