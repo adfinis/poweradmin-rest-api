@@ -2,3 +2,4 @@ flake8
 pytest
 pytest-django
 PyYAML==3.12
+mockldap==0.2.8

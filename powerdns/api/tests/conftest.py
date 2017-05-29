@@ -1,4 +1,5 @@
 import pytest
+import mockldap
 
 
 @pytest.fixture(autouse=True, scope="session")
@@ -19,3 +20,34 @@ def managed_models():
     unmanaged_models = list(app.get_models())
     for model in unmanaged_models:
         model._meta.managed = False
+
+
+@pytest.fixture(autouse=True, scope="session")
+def ldap_users():
+    top = ("o=test", {"o": "test"})
+    people = ("ou=people,o=test", {"ou": "people"})
+    groups = ("ou=groups,o=test", {"ou": "groups"})
+
+    ldapuser = (
+        "uid=ldapuser,ou=people,o=test", {
+            "uid": ["ldapuser"],
+            "objectClass": [
+                "person", "organizationalPerson",
+                "inetOrgPerson", "posixAccount"
+            ],
+            "userPassword": ["Test1234!"],
+            "uidNumber": ["1000"],
+            "gidNumber": ["1000"],
+            "givenName": ["Ldapuser"],
+            "sn": ["LdapUser"]
+        }
+    )
+    directory = dict([top, people, groups, ldapuser])  # noqa: C406
+
+    mock = mockldap.MockLdap(directory)
+    mock.start()
+
+    yield
+
+    mock.stop()
+    del mock

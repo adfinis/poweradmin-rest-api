@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.hashers import check_password
 
 
 class Domain(models.Model):
@@ -55,9 +56,49 @@ class User(models.Model):
     email = models.CharField(max_length=255)
     description = models.TextField()
     level = models.IntegerField()
-    active = models.IntegerField()
+    is_active = models.IntegerField(db_column='active')
     perm_templ = models.IntegerField()
     use_ldap = models.IntegerField()
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = [
+        'fullname', 'email', 'description', 'level', 'perm_templ', 'use_ldap'
+    ]
+
+    def check_password(self, raw_password):
+        """
+        TODO: implement hash algorithm check as powerdns frontend
+        """
+        return check_password(raw_password, self.password)
+
+    def save(self, *args, **kwargs):
+        """
+        We do not have a last_login field on powerdns database so need
+        to avoid it that it is going to be saved.
+        """
+        if 'last_login' in (kwargs.get('update_fields') or []):
+            kwargs['update_fields'].remove('last_login')
+
+        super().save(*args, **kwargs)
+
+    def get_username(self):
+        return self.username
+
+    @property
+    def is_authenticated(self):
+        """
+        Always return True. This is a way to tell if the user has been
+        authenticated in templates.
+        """
+        return True
+
+    @property
+    def is_anonymous(self):
+        """
+        Always return False. This is a way of comparing User objects to
+        anonymous users.
+        """
+        return False
 
     class Meta:
         managed = False

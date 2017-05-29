@@ -1,21 +1,9 @@
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
 from rest_framework.exceptions import ParseError
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
 
 from powerdns.api.filters import RecordFilter
 from powerdns.api.models import Domain, Record, User
 from powerdns.api.serializers import DomainSerializer, RecordSerializer
-
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'domains': reverse('domain-list', request=request, format=format),
-        'records': reverse('record-list', request=request, format=format),
-    })
 
 
 class DomainViewSet(viewsets.ModelViewSet):
@@ -23,7 +11,6 @@ class DomainViewSet(viewsets.ModelViewSet):
     This viewset provides actions around `domains`.
     """
     serializer_class = DomainSerializer
-    permission_classes = (IsAuthenticated,)
     lookup_field = 'name'
     lookup_value_regex = '.*'
 
@@ -70,7 +57,6 @@ class RecordViewSet(RequiredFilterViewSetMixin, viewsets.ModelViewSet):
     This viewset provides actions around `records`.
     """
     serializer_class = RecordSerializer
-    permission_classes = (IsAuthenticated,)
     filter_class = RecordFilter
     required_filters = ('domain',)
 

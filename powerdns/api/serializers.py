@@ -22,8 +22,8 @@ class DomainSerializer(serializers.ModelSerializer):
         """
         domain = super().create(validated_data)
 
-        owner = User.objects.get(username__iexact=self.context['request'].user)
-        Zone.objects.create(domain=domain, owner=owner.id, zone_templ_id=0)
+        user = self.context['request'].user
+        Zone.objects.create(domain=domain, owner=user.id, zone_templ_id=0)
 
         return domain
 
