@@ -23,6 +23,11 @@ class RecordTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_record_list_without_domain_filter(self):
+        url = reverse('record-list')
+        response = self.client.get(url, format='json')
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+
     def test_record_list(self):
 
         url = reverse('record-list')
