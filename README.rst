@@ -22,9 +22,10 @@ Installation
     pip install -r requirements.txt
 
 
-Configuration
+Settings
 -------------
-The configuration happens through `sydns/configuration.py`.
+Use `powerdns/settings_example.py` as basis for your configuration.
 
+You can activate by using `DJANGO_SETTINGS_MODULE`
 
-TODO: how to test with real data
+https://docs.djangoproject.com/en/1.11/topics/settings/#designating-the-settings
