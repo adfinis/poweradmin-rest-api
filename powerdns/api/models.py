@@ -78,16 +78,6 @@ class User(models.Model):
         encoded = hashlib.md5(raw_password.encode()).hexdigest()
         return encoded == self.password
 
-    def save(self, *args, **kwargs):
-        """
-        We do not have a last_login field on powerdns database so need
-        to avoid it that it is going to be saved.
-        """
-        if 'last_login' in (kwargs.get('update_fields') or []):
-            kwargs['update_fields'].remove('last_login')
-
-        super().save(*args, **kwargs)
-
     def get_username(self):
         return self.username
 

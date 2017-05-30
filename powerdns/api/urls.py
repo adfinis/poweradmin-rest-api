@@ -11,6 +11,6 @@ router.register(r'records', RecordViewSet, base_name='record')
 urlpatterns = router.urls
 
 urlpatterns += [
-    url(r'^token-auth/', obtain_jwt_token),
-    url(r'^token-refresh/', refresh_jwt_token),
+    url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api-token-refresh/', refresh_jwt_token),
 ]
