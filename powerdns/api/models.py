@@ -3,7 +3,8 @@
 #   * Make sure each model has one field with primary_key=True
 from __future__ import unicode_literals
 
-from django.contrib.auth.hashers import check_password
+import hashlib
+
 from django.contrib.auth.models import UserManager
 from django.db import models
 
@@ -70,9 +71,12 @@ class User(models.Model):
 
     def check_password(self, raw_password):
         """
-        TODO: implement hash algorithm check as powerdns frontend
+        Powerdns frontend uses md5 hashing, so we need to
+        do it here as well. Once frontend is being replaced, this
+        needs to be reconsidered.
         """
-        return check_password(raw_password, self.password)
+        encoded = hashlib.md5(raw_password.encode()).hexdigest()
+        return encoded == self.password
 
     def save(self, *args, **kwargs):
         """
