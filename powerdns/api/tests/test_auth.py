@@ -1,7 +1,7 @@
-from rest_framework.test import APITestCase
+from rest_framework_jwt.test import APIJWTTestCase
 
 
-class AuthTests(APITestCase):
+class AuthTests(APIJWTTestCase):
 
     fixtures = ['domains.yaml']
 

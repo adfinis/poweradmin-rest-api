@@ -22,9 +22,20 @@ Installation
     pip install -r requirements.txt
 
 
-Configuration
+Settings
+--------
+Use `powerdns/settings_example.py` as basis for your configuration.
+
+You can activate by using `DJANGO_SETTINGS_MODULE`
+
+https://docs.djangoproject.com/en/1.11/topics/settings/#designating-the-settings
+
+Documentation
 -------------
-The configuration happens through `sydns/configuration.py`.
 
+You can browse the api with swagger by opening host name (e.g. http://localhost:8000).
 
-TODO: how to test with real data
+For authentication use `api-token-auth` call and assign `username` and `password`.
+You will receive a JWT token. Copy this token and click on `Authorize`.
+
+As `api_key` assign `JWT token` and login. You should now see a `v1` api tree.

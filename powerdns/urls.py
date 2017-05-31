@@ -14,7 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import include, url
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+from powerdns.api.views import SwaggerSchemaView
 
 urlpatterns = [
     url(r'^v1/', include('powerdns.api.urls')),
+    url(r'^$', SwaggerSchemaView.as_view()),
+    url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api-token-refresh/', refresh_jwt_token),
 ]

@@ -5,7 +5,7 @@ from powerdns.api.models import Domain, Record, Zone
 
 
 class DomainSerializer(serializers.ModelSerializer):
-    # TODO: default set type to NATIVE
+    type = serializers.CharField(default='NATIVE')
     """
     `NATIVE` replication is the default, unless other operation is specifically
     configured. Native replication basically means that PowerDNS will not send

@@ -1,25 +1,23 @@
 from django.core.urlresolvers import reverse
 from rest_framework import status
-from rest_framework.test import APIClient, APITestCase
+from rest_framework_jwt.test import APIJWTTestCase
 
 from powerdns.api import models
 
 
-class RecordTests(APITestCase):
+class RecordTests(APIJWTTestCase):
     # TODO: use pure pytest and fixtures
     # this will also replace django fixtures which are hard to maintain
 
     fixtures = ['domains.yaml']
 
     def setUp(self):
-
         self.client.login(username='ldapuser', password='Test1234!')
 
     def test_record_list_without_auth(self):
-
-        client = APIClient()
+        self.client.logout()
         url = reverse('record-list')
-        response = client.get(url, format='json')
+        response = self.client.get(url, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -66,15 +64,9 @@ class RecordTests(APITestCase):
                  'id': 4,
                  'name': 'www.example.com',
                  'prio': 0,
-                 'type': 'A'},
-                {'content': 'dns1.syhosting.ch info@syhosting.ch 2014103002 ',
-                 'ttl': 3600,
-                 'domain': 'example2.com',
-                 'id': 5,
-                 'name': 'example2.com',
-                 'prio': 0,
-                 'type': 'SOA'}],
-            'count': 5
+                 'type': 'A'}
+            ],
+            'count': 4
         }
 
         assert response.json() == expected_json
