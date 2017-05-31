@@ -1,21 +1,9 @@
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
 from rest_framework.exceptions import ParseError
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
 
-from sydns.api.filters import RecordFilter
-from sydns.api.models import Domain, Record, User
-from sydns.api.serializers import DomainSerializer, RecordSerializer
-
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'domains': reverse('domain-list', request=request, format=format),
-        'records': reverse('record-list', request=request, format=format),
-    })
+from powerdns.api.filters import RecordFilter
+from powerdns.api.models import Domain, Record
+from powerdns.api.serializers import DomainSerializer, RecordSerializer
 
 
 class DomainViewSet(viewsets.ModelViewSet):
@@ -23,7 +11,6 @@ class DomainViewSet(viewsets.ModelViewSet):
     This viewset provides actions around `domains`.
     """
     serializer_class = DomainSerializer
-    permission_classes = (IsAuthenticated,)
     lookup_field = 'name'
     lookup_value_regex = '.*'
 
@@ -31,12 +18,7 @@ class DomainViewSet(viewsets.ModelViewSet):
         """
         Only return domains which the user is allowed to manage.
         """
-
-        # django_auth_ldap converts the username to lowercase when
-        # creating a new user
-        owner = User.objects.get(username__iexact=self.request.user.username)
-
-        return Domain.objects.filter(zones__owner=owner.id)
+        return Domain.objects.filter(zones__owner=self.request.user.id)
 
 
 class RequiredFilterViewSetMixin(object):
@@ -70,7 +52,6 @@ class RecordViewSet(RequiredFilterViewSetMixin, viewsets.ModelViewSet):
     This viewset provides actions around `records`.
     """
     serializer_class = RecordSerializer
-    permission_classes = (IsAuthenticated,)
     filter_class = RecordFilter
     required_filters = ('domain',)
 
@@ -78,10 +59,6 @@ class RecordViewSet(RequiredFilterViewSetMixin, viewsets.ModelViewSet):
         """
         Only return records which the user is allowed to manage.
         """
-
-        # django_auth_ldap converts the username to lowercase when
-        # creating a new user
-        owner = User.objects.get(username__iexact=self.request.user.username)
         return Record.objects.filter(
-            domain__zones__owner=owner.id
+            domain__zones__owner=self.request.user.id
         )

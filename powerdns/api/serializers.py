@@ -1,10 +1,18 @@
 from django.db import transaction
 from rest_framework import exceptions, serializers
 
-from sydns.api.models import Domain, Record, User, Zone
+from powerdns.api.models import Domain, Record, Zone
 
 
 class DomainSerializer(serializers.ModelSerializer):
+    # TODO: default set type to NATIVE
+    """
+    `NATIVE` replication is the default, unless other operation is specifically
+    configured. Native replication basically means that PowerDNS will not send
+    out DNS update notifications, nor will react to them. PowerDNS assumes that
+    the backend is taking care of replication unaided.  Other options include
+    `SLAVE` and `MASTER`.
+    """
 
     @transaction.atomic
     def create(self, validated_data):
@@ -14,8 +22,8 @@ class DomainSerializer(serializers.ModelSerializer):
         """
         domain = super().create(validated_data)
 
-        owner = User.objects.get(username__iexact=self.context['request'].user)
-        Zone.objects.create(domain=domain, owner=owner.id)
+        user = self.context['request'].user
+        Zone.objects.create(domain=domain, owner=user.id, zone_templ_id=0)
 
         return domain
 
@@ -23,7 +31,6 @@ class DomainSerializer(serializers.ModelSerializer):
         lookup_field = 'name'
         model = Domain
         fields = ('name', 'type',)
-        read_only_fields = ('type',)
 
 
 class RecordSerializer(serializers.ModelSerializer):
@@ -36,8 +43,7 @@ class RecordSerializer(serializers.ModelSerializer):
         Check whether is allowed to update records on this domain
         """
         request = self.context['request']
-        owner = User.objects.get(username__iexact=request.user.username)
-        if not domain.zones.filter(owner=owner.id).exists():
+        if not domain.zones.filter(owner=request.user.id).exists():
             raise exceptions.PermissionDenied()
 
         return domain
