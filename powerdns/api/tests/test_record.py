@@ -64,15 +64,9 @@ class RecordTests(APIJWTTestCase):
                  'id': 4,
                  'name': 'www.example.com',
                  'prio': 0,
-                 'type': 'A'},
-                {'content': 'dns1.syhosting.ch info@syhosting.ch 2014103002 ',
-                 'ttl': 3600,
-                 'domain': 'example2.com',
-                 'id': 5,
-                 'name': 'example2.com',
-                 'prio': 0,
-                 'type': 'SOA'}],
-            'count': 5
+                 'type': 'A'}
+            ],
+            'count': 4
         }
 
         assert response.json() == expected_json
