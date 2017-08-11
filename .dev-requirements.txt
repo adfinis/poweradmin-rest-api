@@ -1,5 +1,4 @@
 flake8==3.4.1
-flake8-isort==2.2.1
 pytest
 pytest-django
 PyYAML==3.12
