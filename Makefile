@@ -1,5 +1,4 @@
 .PHONY: install install_dev test
-PROJECT := powerdns
 
 install: .requirements.txt  ## Standard pip install including .requirements.txt (for testing)
 	pip install --upgrade pip
@@ -10,5 +9,5 @@ install_dev: .dev-requirements.txt install  # Standard pip install inlcuding .de
 	pip install -r .dev-requirements.txt -r .requirements.txt
 
 test:
-	@flake8 $(PROJECT)
-	@pytest --cov --create-db $(PROJECT)
+	@flake8
+	@pytest --cov --create-db
