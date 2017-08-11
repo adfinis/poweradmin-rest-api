@@ -21,7 +21,6 @@ ignore =
     # other string does contain unindexed parameters
     P103
 
-jobs=auto
 exclude =
     migrations,
     powerdns/settings_*,

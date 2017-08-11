@@ -10,5 +10,5 @@ install_dev: .dev-requirements.txt install  # Standard pip install inlcuding .de
 	pip install -r .dev-requirements.txt -r .requirements.txt
 
 test:
-	@flake8
-	@pytest --cov --create-db
+	@flake8 $(PROJECT)
+	@pytest --cov --create-db $(PROJECT)

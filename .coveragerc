@@ -1,2 +1,11 @@
+[run]
+source=.
+
 [report]
 fail_under = 100
+
+omit=
+    manage.py
+    setup.py
+    powerdns/settings_*.py
+    powerdns/wsgi.py
