@@ -1,8 +1,5 @@
+.PHONY: install install_dev test
 PROJECT := powerdns
-
-include pyproject/Makefile
-
-FAIL_UNDER := 100
 
 install: .requirements.txt  ## Standard pip install including .requirements.txt (for testing)
 	pip install --upgrade pip
@@ -11,3 +8,7 @@ install: .requirements.txt  ## Standard pip install including .requirements.txt 
 install_dev: .dev-requirements.txt install  # Standard pip install inlcuding .dev-requirements (for development)
 	pip install --upgrade pip
 	pip install -r .dev-requirements.txt -r .requirements.txt
+
+test:
+	@flake8
+	@pytest --cov --create-db
