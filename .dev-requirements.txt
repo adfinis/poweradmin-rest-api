@@ -1,5 +1,6 @@
-flake8
-pytest
+flake8==3.4.1
+pytest==3.2.1
+pytest-cov==2.5.1
 pytest-django
 PyYAML==3.12
 mockldap==0.2.8

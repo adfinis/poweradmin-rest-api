@@ -21,6 +21,9 @@ ignore =
     # other string does contain unindexed parameters
     P103
 
-jobs=auto
-exclude = migrations
+exclude =
+    migrations,
+    powerdns/settings_*,
+    manage.py,
+    setup.py
 max-complexity = 10
