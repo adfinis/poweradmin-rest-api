@@ -9,4 +9,7 @@ class RecordFilter(FilterSet):
 
     class Meta:
         model = Record
-        fields = ['domain']
+        fields = [
+            'domain',
+            'name',
+        ]
