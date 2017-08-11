@@ -10,7 +10,6 @@ variables:
 before_script:
   - export PIP_CACHE_DIR='pip-cache'
   - export DJANGO_SETTINGS_MODULE=powerdns.settings_ci
-  - git submodule update --init
   - virtualenv -p `which python3` env
   - source env/bin/activate
   - make install_dev
