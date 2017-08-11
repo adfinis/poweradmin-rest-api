@@ -10,8 +10,8 @@ variables:
 before_script:
   - export PIP_CACHE_DIR='pip-cache'
   - export DJANGO_SETTINGS_MODULE=powerdns.settings_ci
-  - virtualenv -p `which python3` env
-  - source env/bin/activate
+  - virtualenv -p `which python3` /tmp/env
+  - source /tmp/env/bin/activate
   - make install_dev
 
 stages:
