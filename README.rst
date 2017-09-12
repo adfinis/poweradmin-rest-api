@@ -1,5 +1,11 @@
 PowerDNS REST API
 =================
+
+|travis|
+
+.. |travis|  image:: https://travis-ci.org/adfinis-sygroup/powerdns-rest-api.png?branch=master
+   :target: https://travis-ci.org/adfinis-sygroup/powerdns-rest-api
+
 A basic RESTful API for PowerDNS 3 compatible with PowerAdmin database schema.
 
 Installation
@@ -19,7 +25,11 @@ Installation
 
 3. Install python dependencies
 
+.. code:: shell
+
     make install
+    # or for development
+    make install_dev
 
 
 Settings
