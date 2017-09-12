@@ -1,6 +1,6 @@
-SyDNS
-=====
-A basic RESTful API for PowerDNS 3
+PowerDNS REST API
+=================
+A basic RESTful API for PowerDNS 3 compatible with PowerAdmin database schema.
 
 Installation
 ------------
@@ -19,7 +19,7 @@ Installation
 
 3. Install python dependencies
 
-    pip install -r requirements.txt
+    make install
 
 
 Settings
@@ -39,3 +39,9 @@ For authentication use `api-token-auth` call and assign `username` and `password
 You will receive a JWT token. Copy this token and click on `Authorize`.
 
 As `api_key` assign `JWT token` and login. You should now see a `v1` api tree.
+
+License
+-------
+
+PowerDNS REST API is licensed under GPL-3 or later following license model of PowerAdmin it is
+based on.

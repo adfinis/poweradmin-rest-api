@@ -1,0 +1,73 @@
+########### Domain example.com ###########
+- model: api.domain
+  pk: 1
+  fields: {name: example.com, master: null, last_check: null, type: NATIVE, notified_serial: 2014103002,
+    account: null}
+
+- model: api.zone
+  pk: 1
+  fields: {domain: 1, owner: 2, comment: null, zone_templ_id: 0}
+
+- model: api.record
+  pk: 1
+  fields: {domain: 1, name: example.com, type: SOA, content: 'dns1.syhosting.ch
+      info@syhosting.ch 2014103002 ', ttl: 3600, prio: 0, change_date: 1109776335,
+    ordername: null, auth: null}
+
+- model: api.record
+  pk: 2
+  fields: {domain: 1, name: example.com, type: NS, content: dns1.syhosting.ch,
+    ttl: 3600, prio: 0, change_date: 1109776335, ordername: null, auth: null}
+
+- model: api.record
+  pk: 3
+  fields: {domain: 1, name: example.com, type: NS, content: dns2.syhosting.ch,
+    ttl: 3600, prio: 0, change_date: 1109776335, ordername: null, auth: null}
+
+- model: api.record
+  pk: 4
+  fields: {domain: 1, name: www.example.com, type: A, content: 93.184.216.34,
+    ttl: 600, prio: 0, change_date: 1414680868, ordername: null, auth: null}
+
+########### Domain example2.com ###########
+- model: api.domain
+  pk: 2
+  fields: {name: example2.com, master: null, last_check: null, type: NATIVE, notified_serial: 2014103002,
+    account: null}
+
+- model: api.zone
+  pk: 2
+  fields: {domain: 2, owner: 2, comment: null, zone_templ_id: 0}
+
+- model: api.record
+  pk: 5
+  fields: {domain: 2, name: example2.com, type: SOA, content: 'dns1.syhosting.ch
+      info@syhosting.ch 2014103002 ', ttl: 3600, prio: 0, change_date: 1109776335,
+    ordername: null, auth: null}
+
+########### Users ###########
+- model: api.user
+  pk: 1
+  fields:
+    username: admin
+    password: ecc4208a7778c1d76e7e89c5253128c5
+    fullname: Administrator
+    email: info@syhosting.ch
+    description: Administrator
+    level: 10
+    is_active: 1
+    perm_templ: 1
+    use_ldap: 0
+
+- model: api.user
+  pk: 2
+  fields:
+    username: ldapuser
+    password: notset
+    fullname: Ldapuser
+    email: info@syhosting.ch
+    description: LDAP User
+    level: 10
+    is_active: 1
+    perm_templ: 1
+    use_ldap: 1

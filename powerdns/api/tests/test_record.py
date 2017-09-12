@@ -58,7 +58,7 @@ class RecordTests(APIJWTTestCase):
                  'name': 'example.com',
                  'prio': 0,
                  'type': 'NS'},
-                {'content': '91.234.189.11',
+                {'content': '93.184.216.34',
                  'ttl': 600,
                  'domain': 'example.com',
                  'id': 4,
