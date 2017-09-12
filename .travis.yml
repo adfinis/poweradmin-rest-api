@@ -1,0 +1,19 @@
+language: python
+
+env:
+    DJANGO_SETTINGS_MODULE=powerdns.settings_ci
+
+python:
+  - "3.5"
+  - "3.6"
+
+services:
+  - mysql
+
+cache:
+  - pip
+
+install:
+  - make install_dev
+
+script: make test
