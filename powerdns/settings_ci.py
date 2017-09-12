@@ -4,9 +4,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'powerdns',
-        'USER': 'powerdns',
-        'PASSWORD': 'powerdns',
-        'HOST': 'mysql',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
