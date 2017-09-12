@@ -33,7 +33,6 @@ setup(
         'djangorestframework',
         'PyYAML',
         'mysqlclient',
-        'uwsgi',
     ],
     extras_require={
         'test': ['pytest'],
