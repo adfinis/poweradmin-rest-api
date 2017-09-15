@@ -71,7 +71,7 @@ class User(models.Model):
 
     def check_password(self, raw_password):
         """
-        Powerdns frontend uses md5 hashing, so we need to
+        PowerAdmin frontend uses md5 hashing, so we need to
         do it here as well. Once frontend is being replaced, this
         needs to be reconsidered.
         """
@@ -103,7 +103,7 @@ class User(models.Model):
 
 
 # following models are currently not in use but here for full representation
-# of powerdns db schema
+# of PowerAdmin db schema
 
 class Cryptokeys(models.Model):
     domain_id = models.IntegerField()

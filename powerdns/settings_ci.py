@@ -1,9 +1,9 @@
-from powerdns.settings import *  # noqa: F401
+from .settings import *  # noqa: F401
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'powerdns',
+        'NAME': 'poweradmin',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

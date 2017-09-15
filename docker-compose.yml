@@ -6,7 +6,7 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: powerdns
-      MYSQL_DATABASE: powerdns
-      MYSQL_USER: powerdns
-      MYSQL_PASSWORD: powerdns
+      MYSQL_ROOT_PASSWORD: poweradmin
+      MYSQL_DATABASE: poweradmin
+      MYSQL_USER: poweradmin
+      MYSQL_PASSWORD: poweradmin

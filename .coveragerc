@@ -7,5 +7,5 @@ fail_under = 100
 omit=
     manage.py
     setup.py
-    powerdns/settings_*.py
-    powerdns/wsgi.py
+    poweradmin/settings_*.py
+    poweradmin/wsgi.py

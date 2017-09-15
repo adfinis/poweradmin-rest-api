@@ -23,7 +23,7 @@ ignore =
 
 exclude =
     migrations,
-    powerdns/settings_*,
+    poweradmin/settings_*,
     manage.py,
     setup.py
 max-complexity = 10

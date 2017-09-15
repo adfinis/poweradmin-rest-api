@@ -1,4 +1,4 @@
-from powerdns.settings import *  # noqa: F401
+from poweradmin.settings import *  # noqa: F401
 
 # needs to OFF in production
 DEBUG = False
@@ -7,8 +7,8 @@ DEBUG = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'powerdns',
-        'USER': 'powerdns',
+        'NAME': 'poweradmin',
+        'USER': 'poweradmin',
         'PASSWORD': 'somepasword',
         'HOST': 'mysql',
         'PORT': '3306',
@@ -18,7 +18,7 @@ DATABASES = {
 # ldap configuration
 LDAP_BASE = 'dc=example,dc=com'
 AUTH_LDAP_SERVER_URI = "ldaps://localhost:7636"
-AUTH_LDAP_BIND_DN = 'uid=powerdns.ldap.auth,cn=users,{}'.format(LDAP_BASE)
+AUTH_LDAP_BIND_DN = 'uid=poweradmin.ldap.auth,cn=users,{}'.format(LDAP_BASE)
 AUTH_LDAP_START_TLS = False
 AUTH_LDAP_BIND_PASSWORD = 'somepassword'
 AUTH_LDAP_USER_DN_TEMPLATE = 'uid=%(user)s,cn=users,{0}'.format(LDAP_BASE)

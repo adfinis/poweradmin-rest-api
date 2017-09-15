@@ -1,7 +1,7 @@
 from django.db import transaction
 from rest_framework import exceptions, serializers
 
-from powerdns.api.models import Domain, Record, Zone
+from .models import Domain, Record, Zone
 
 
 class DomainSerializer(serializers.ModelSerializer):

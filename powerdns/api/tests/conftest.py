@@ -5,7 +5,7 @@ import pytest
 @pytest.fixture(autouse=True, scope="session")
 def managed_models():
     """
-    For unit tests we need create an empty powerdns database
+    For unit tests we need create an empty PowerAdmin database
     scheme but this only works for models which are managed.
     Hence with this auto fixture we temporarly change models to be managed.
     """

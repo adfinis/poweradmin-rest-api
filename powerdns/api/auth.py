@@ -7,7 +7,7 @@ UserModel = get_user_model()
 
 class ModelBackend(ModelBackend):
     """
-    Authenticates against powerdns.api.User model
+    Authenticates against poweradmin.api.User model
 
     Only authenticates against password in database if use_ldap
     flag is set to zero.

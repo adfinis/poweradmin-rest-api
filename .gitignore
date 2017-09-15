@@ -1,6 +1,6 @@
 env
 db.sqlite3
-powerdns_data.sql
+poweradmin_data.sql
 mysql
 *.swp
 
@@ -8,7 +8,7 @@ mysql
 .cache/
 .coverage
 .deps/
-powerdns_rest_api.egg-info/
+poweradmin_rest_api.egg-info/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

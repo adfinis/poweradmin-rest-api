@@ -1,1 +1,1 @@
-default_app_config = 'powerdns.api.apps.ApiConfig'
+default_app_config = 'poweradmin.api.apps.ApiConfig'
