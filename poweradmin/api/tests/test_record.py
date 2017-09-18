@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework_jwt.test import APIJWTTestCase
 
-from powerdns.api import models
+from poweradmin.api import models
 
 
 class RecordTests(APIJWTTestCase):

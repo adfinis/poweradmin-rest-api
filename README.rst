@@ -1,12 +1,14 @@
-PowerDNS REST API
+PowerAdmin REST API
 =================
 
 |travis|
 
-.. |travis|  image:: https://travis-ci.org/adfinis-sygroup/powerdns-rest-api.png?branch=master
-   :target: https://travis-ci.org/adfinis-sygroup/powerdns-rest-api
+.. |travis|  image:: https://travis-ci.org/adfinis-sygroup/poweradmin-rest-api.png?branch=master
+   :target: https://travis-ci.org/adfinis-sygroup/poweradmin-rest-api
 
-A basic RESTful API for PowerDNS 3 compatible with PowerAdmin database schema.
+A basic RESTful API for `PowerAdmin`_
+
+.. _ `PowerAdmin`: http://www.poweradmin.org/
 
 Installation
 ------------
@@ -34,7 +36,7 @@ Installation
 
 Settings
 --------
-Use `powerdns/settings_example.py` as basis for your configuration.
+Use `poweradmin/settings_example.py` as basis for your configuration.
 
 You can activate by using `DJANGO_SETTINGS_MODULE`
 
@@ -53,5 +55,5 @@ As `api_key` assign `JWT token` and login. You should now see a `v1` api tree.
 License
 -------
 
-PowerDNS REST API is licensed under GPL-3 or later following license model of PowerAdmin it is
+PowerAdmin REST API is licensed under GPL-3 or later following license model of PowerAdmin it is
 based on.

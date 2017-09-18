@@ -1,7 +1,7 @@
 import django_filters
 from django_filters.rest_framework import FilterSet
 
-from powerdns.api.models import Record
+from .models import Record
 
 
 class RecordFilter(FilterSet):

@@ -6,9 +6,9 @@ from rest_framework.schemas import SchemaGenerator
 from rest_framework.views import APIView
 from rest_framework_swagger import renderers
 
-from powerdns.api.filters import RecordFilter
-from powerdns.api.models import Domain, Record
-from powerdns.api.serializers import DomainSerializer, RecordSerializer
+from .filters import RecordFilter
+from .models import Domain, Record
+from .serializers import DomainSerializer, RecordSerializer
 
 
 class DomainViewSet(viewsets.ModelViewSet):
@@ -77,7 +77,7 @@ class SwaggerSchemaView(APIView):  # pragma: no cover
     ]
 
     def get(self, request):
-        generator = SchemaGenerator(title='PowerDNS API')
+        generator = SchemaGenerator(title='PowerAdmin API')
         schema = generator.get_schema(request=request)
 
         return Response(schema)

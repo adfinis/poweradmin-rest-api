@@ -1,4 +1,4 @@
-"""powerdns URL Configuration
+"""PowerAdmin URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/urls/
@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
-from powerdns.api.views import SwaggerSchemaView
+from poweradmin.api.views import SwaggerSchemaView
 
 urlpatterns = [
-    url(r'^v1/', include('powerdns.api.urls')),
+    url(r'^v1/', include('poweradmin.api.urls')),
     url(r'^$', SwaggerSchemaView.as_view()),
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),

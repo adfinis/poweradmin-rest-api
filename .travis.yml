@@ -1,7 +1,7 @@
 language: python
 
 env:
-    DJANGO_SETTINGS_MODULE=powerdns.settings_ci
+    DJANGO_SETTINGS_MODULE=poweradmin.settings_ci
 
 python:
   - "3.5"

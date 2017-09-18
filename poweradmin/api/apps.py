@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class ApiConfig(AppConfig):
-    name = 'powerdns.api'
+    name = 'poweradmin.api'
     label = 'api'
