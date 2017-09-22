@@ -45,7 +45,9 @@ https://docs.djangoproject.com/en/1.11/topics/settings/#designating-the-settings
 Documentation
 -------------
 
-You can browse the api with swagger by opening host name (e.g. http://localhost:8000).
+You can browse the api with swagger_ by opening host name (e.g. http://localhost:8000).
+
+.. _swagger: https://swagger.io/
 
 For authentication use `api-token-auth` call and assign `username` and `password`.
 You will receive a JWT token. Copy this token and click on `Authorize`.
