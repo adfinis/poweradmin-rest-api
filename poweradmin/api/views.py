@@ -57,7 +57,7 @@ class RecordViewSet(RequiredFilterViewSetMixin, viewsets.ModelViewSet):
     This viewset provides actions around `records`.
     """
     serializer_class = RecordSerializer
-    filter_class = RecordFilter
+    filterset_class = RecordFilter
     required_filters = ('domain',)
 
     def get_queryset(self):
