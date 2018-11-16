@@ -5,7 +5,7 @@ from .models import Record
 
 
 class RecordFilter(FilterSet):
-    domain = django_filters.CharFilter(name='domain__name')
+    domain = django_filters.CharFilter(field_name='domain__name')
 
     class Meta:
         model = Record

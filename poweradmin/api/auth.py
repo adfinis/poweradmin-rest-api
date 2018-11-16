@@ -32,15 +32,8 @@ class LDAPBackend(LDAPBackend):
     Added ability that only users with use_ldap flag set to
     one can actually authenticate.
     """
-    def authenticate(self, request, username, password, **kwargs):
-        """
-        To suppress RemovedInDjango21Warning added function with first argument
-        being request. Can be removed once
-        https://bitbucket.org/psagers/django-auth-ldap/issues/73 is fixed.
-        """
-        return super().authenticate(username, password, **kwargs)
 
-    def get_or_create_user(self, username, ldap_user):
+    def get_or_build_user(self, username, ldap_user):
         """
         Users which do not exist on database with flag use_ldap=1
         are not allowed to login. Hence, we do not create users
