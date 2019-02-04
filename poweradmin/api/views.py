@@ -78,6 +78,6 @@ class SwaggerSchemaView(APIView):  # pragma: no cover
 
     def get(self, request):
         generator = SchemaGenerator(title='PowerAdmin API')
-        schema = generator.get_schema(request=request)
+        schema = generator.get_schema()
 
         return Response(schema)
