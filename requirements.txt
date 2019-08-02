@@ -1,4 +1,4 @@
-django==1.11.22 # pyup: >=1.11,<1.12
+django==2.2.4 # pyup: >=1.11,<1.12
 djangorestframework==3.9.1
 djangorestframework-jwt==1.11.0
 django-auth-ldap==2.0.0
